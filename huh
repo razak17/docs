@@ -1,0 +1,14 @@
+#!/bin/bash
+
+echo Enter name: read -r user
+
+a=17
+b=38
+
+if [[ 2 -gt 4 ]]; then
+	echo "yay $user"
+fi
+
+if ((a < b)); then
+	echo "$a is smaller than $b"
+fi

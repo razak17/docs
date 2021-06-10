@@ -1,0 +1,207 @@
+the quick brown fox jumps over the lazy dog.
+  -- {"FileType", "sql", "setlocal omnifunc=vim_dadbod_completion#omni"}
+          diagnosticSeverityOverrides = {
+            reportMissingImports = true,
+            reportMissingTypeStubs = false,
+            reportUnusedImport = false,
+            reportOverlappingOverload = false,
+            reportGeneralTypeIssues = false,
+            reportUnknownParameterType = false,
+            reportUnknownArgumentType = false,
+            reportInvalidStubStatement = false,
+            reportIncompleteStub = false
+
+          }
+
+✓
+☕
+•
+
+use { 'hrsh7th/vim-vsnip' }
+use { 'cstrap/python-snippets' }
+use { 'ylcnfrht/vscode-python-snippet-pack' }
+use { 'xabikos/vscode-javascript' }
+use { 'golang/vscode-go' }
+use { 'rust-lang/vscode-rust' }
+
+autocmd BufEnter,BufRead * setlocal formatoptions-=cro
+autocmd BufWinEnter,BufNewFile * setlocal formatoptions-=cro
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+" autocmd VimEnter,BufEnter * verbose set formatoptions
+autocmd BufRead,BufNewFile * verbose set formatoptions
+
+augroup LightBg
+  autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=#c3eeff
+augroup END
+
+-- https://github.com/CalinLeafshade/dots/blob/master/nvim/.config/nvim/lua/leafshade/rename.lua
+local function rename(name)
+  local curfilepath = vim.fn.expand("%:p:h")
+  local newname = curfilepath .. "/" .. name
+  vim.api.nvim_command(" saveas " .. newname)
+end
+
+vim.api
+    .nvim_command [[command! -nargs=1 Rename :call v:lua.require('internal.rename')(<f-args>) ]]
+
+return rename
+
+
+-- local init_options = {
+--   onlyAnalyzeProjectsWithOpenFiles = true,
+--   suggestFromUnimportedLibraries = false,
+--   closingLabels = true,
+--   usePlaceholders = true,
+--   completeUnimported = true
+-- };
+
+10.99
+#ff00f5
+
+ indicator_errors = '',
+    indicator_warnings = '',
+    indicator_info = '🛈',
+    indicator_hint = '!',
+    indicator_ok = '',
+
+  symbols = {error = ' ', warn = ' ', info= ' '},
+    symbols = {added= ' ', modified= ' ', removed= ' '},
+
+icon=""
+❌
+🐬tocmd
+
+]
+❐
+prompt_prefix='🍔 '
+hint_sign='',
+  vim.cmd [[ hi ColorColumn guibg=#2c323c ]]
+  -- local bg_def = '#202328'
+-- local bg_def = '#2c323c'
+        code_action_icon = ' ',
+
+           error = "",
+        warning = "",
+        hint = "",
+        information = "",
+        other = "﫠"
+ error = "",
+        warning = "",
+        hint = "",
+        information = "",
+        other = "﫠"
+    },
+    error_sign = '',
+    warn_sign = '',
+    hint_sign = '',
+    infor_sign = '',
+    error_sign = "",
+    warn_sign = "",
+    hint_sign = "",
+    infor_sign = ""
+    error_sign = '',
+    warn_sign = '',
+    hint_sign = '',
+    infor_sign = '',
+}
+柳
+  symbols = {error = ' ', warn = ' ', info= ' '},
+    icon = '',
+      symbols = {added= ' ', modified= ' ', removed= ' '},
+        prompt_prefix = " ",
+    selection_caret = "
+
+202331
+
+-8
+柳',
+2-- local frames = {
+--   '', '', '', '', '', '', '', '', '', '', '',
+--   '', '', '', '', '', '', '', '', '', '', '',
+--   '', '', '', '', '', '',
+-- }.7
+
+
+  indicator_hint = "",
+              status_symbol = "
+
+  code_action_icon = ' '
+
+  柳
+local icons = {
+    slant = {
+        Right = "",
+        Left = ""
+    },
+    diagnostic = {
+        error = "",
+        warn = "",
+        info = "!"
+    },
+    diff = {
+        Add = "",
+        Modified = "",
+        Remove = ""
+    },
+    git = "",
+    mode = {
+        c = "🅒",
+        i = "🅘",
+        n = "🅝",
+        r = "🅡",
+        s = "🅢",
+        t = "🅣",
+        v = "🅥"
+    },
+    bullet = "•"
+}
+
+return icons
+
+
+1101001058
+212300061364
+5KRL38488C86
+  bg = '#282a36';
+
+#ff0000
+function config.bg()
+  vim.cmd [[ colo zephyr ]]
+  vim.cmd [[ autocmd ColorScheme * highlight clear SignColumn ]]
+  -- vim.cmd [[ autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE ]]
+  vim.cmd [[ hi ColorColumn ctermbg=lightgrey ]]
+  vim.cmd [[ hi LineNr ctermbg=NONE guibg=NONE ]]
+  vim.cmd [[ hi Comment cterm=italic ]]
+end
+
+-- vim.defer_fn(vim.schedule_wrap(function()
+--   vim.cmd [[filetype on]]
+--   vim.opt.syntax = 'on'
+--   vim.defer_fn(function()
+--     vim.cmd [[syntax on]]
+--   end, 50)
+-- end), 0)
+
+-- vim.cmd [[
+--   let g:dashboard_custom_header =<< trim END
+--     =================     ===============     ===============   ========  ========
+--     \\ . . . . . . .\\   //. . . . . . .\\   //. . . . . . .\\  \\. . .\\// . . //
+--     ||. . ._____. . .|| ||. . ._____. . .|| ||. . ._____. . .|| || . . .\/ . . .||
+--     || . .||   ||. . || || . .||   ||. . || || . .||   ||. . || ||. . . . . . . ||
+--     ||. . ||   || . .|| ||. . ||   || . .|| ||. . ||   || . .|| || . | . . . . .||
+--     || . .||   ||. _-|| ||-_ .||   ||. . || || . .||   ||. _-|| ||-_.|\ . . . . ||
+--     ||. . ||   ||-'  || ||  `-||   || . .|| ||. . ||   ||-'  || ||  `|\_ . .|. .||
+--     || . _||   ||    || ||    ||   ||_ . || || . _||   ||    || ||   |\ `-_/| . ||
+--     ||_-' ||  .|/    || ||    \|.  || `-_|| ||_-' ||  .|/    || ||   | \  / |-_.||
+--     ||    ||_-'      || ||      `-_||    || ||    ||_-'      || ||   | \  / |  `||
+--     ||    `'         || ||         `'    || ||    `'         || ||   | \  / |   ||
+--     ||            .===' `===.         .==='.`===.         .===' /==. |  \/  |   ||
+--     ||         .=='   \_|-_ `===. .==='   _|_   `===. .===' _-|/   `==  \/  |   ||
+--     ||      .=='    _-'    `-_  `='    _-'   `-_    `='  _-'   `-_  /|  \/  |   ||
+--     ||   .=='    _-'          '-__\._-'         '-_./__-'         `' |. /|  |   ||
+--     ||.=='    _-'                                                     `' |  /==.||
+--     =='    _-'                        N E O V I M                         \/   `==
+--     \   _-'                                                                `-_   /
+--     `''                                                                      ``'
+--   END
+-- ]]

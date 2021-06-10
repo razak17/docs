@@ -1,0 +1,42 @@
+version: "3.3"
+services:
+  redis:
+    image: redis
+    container_name: cache
+    restart: always
+    # command: redis-server /usr/local/etc/redis/redis.conf
+    # volumes:
+    #   - ./redis.conf:/usr/local/etc/redis/redis.conf
+
+  postgres:
+    image: postgres:13
+    container_name: db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: moneyportal
+    volumes:
+      - db_data:/var/lib/postgresql/data
+
+  app:
+    # image: razakmo/moneyportal:1
+    image: razakmoappsmoneyportalregistry.azurecr.io/moneyportal:1
+    container_name: api
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    links:
+      - postgres
+      - redis
+    environment:
+      REDIS_URL: redis://cache
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/moneyportal
+      PORT: 8080
+    ports:
+      - 8080:80
+    command:
+      ["./wait-for-it.sh", "postgres:5432", "--", "node", "dist/index.js"]
+volumes:
+  db_data:

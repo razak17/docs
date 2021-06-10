@@ -1,0 +1,93 @@
+# S1-1
+en
+conf t
+vlan 10
+name users
+vlan 999
+name unused
+ex
+
+interface range f0/1-5, g0/1
+switchport mode access
+switchport access vlan 10
+ex
+
+interface range f0/1-5
+switchport port-security
+switchport port-security maximum 4
+switchport port-security violation restrict
+switchport port-security aging time 10
+switchport port-security mac-address sticky
+ex
+
+interface f0/1
+switchport port-security mac-address 00D0.D3DC.2825
+ex
+
+ip dhcp snooping
+ip dhcp snooping vlan 10,999
+interface range f0/1-5, g0/1
+ip dhcp snooping limit rate 5
+exit
+interface g0/1
+ip dhcp snooping trust
+exit
+
+ip arp inspection vlan 10,999
+interface g0/1
+ip arp inspection trust
+exit
+
+interface range f0/1-5
+spanning-tree portfast
+spanning-tree bpduguard enable
+ex
+
+interface range f0/6-24, g0/2
+switchport mode access
+switchport access vlan 999
+shutdown
+
+Branch-101
+en
+config t
+interface g0/0/0.10
+description WLAN users
+encapsulation dot1q 10
+ip address 192.168.10.1 255.255.255.0
+exit
+
+ip dhcp excluded-address 192.168.10.1
+ip dhcp excluded-address 192.168.10.254
+ip dhcp pool WLAN-hosts
+network 192.168.10.0 255.255.255.0
+default-router 192.168.10.1
+dns-server 198.51.100.163
+exit
+
+interface g0/0/1
+ip address dhcp
+end
+exit
+
+Central
+enable
+conf t
+ip route 0.0.0.0 0.0.0.0 g0/0/2
+ip route 0.0.0.0 0.0.0.0 s0/1/0 10
+ipv6 unicast-routing
+ipv6 route ::/0 2001:DB8:ACAD:A::2
+ipv6 route ::/0 2001:db8:acad:b::2 10
+ip route 192.168.10.0 255.255.255.0 g0/0/2
+ip route 192.168.10.0 255.255.255.0 s0/1/0 10
+ip route 192.168.3.122 255.255.255.255 s0/1/1
+ipv6 route 2001:db8:acad:3::122/128 2001:db8:acad:d::2
+
+Branch-101
+enable
+configure terminal
+ip route 0.0.0.0 0.0.0.0 g0/0/1
+ip route 0.0.0.0 0.0.0.0 s0/1/0 10
+ipv6 unicast-routing
+ipv6 route ::/0 2001:DB8:ACAD:C::1
+ipv6 route ::/0 2001:DB8:ACAD:B::1 10
